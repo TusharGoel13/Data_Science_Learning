@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Urls||URL Shorten App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/basestyle.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/urls.css')}}">
+
+
+</head>
+
+<body style="background-color: #1d243d">
+    <div class="header" style="background-color: #1d243d">
+        <a href="" class="logo" style="color: #eeee">URL SHORTEN APP</a>
+        <div class="header-right">
+            <a class="active" style="color: #eeee" href="/">Home</a>
+            <a style="color: #eeee" href="/logout">Logout</a>
+        </div>
+    </div>
+    
+    <div class ="table">
+
+        <table>
+            <caption id = "Tablecaption">Previous URLs</caption>
+            <thead>
+                <tr>
+                    <th>Original URL</th>
+                    <th>Shortened URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                <tr>
+                    <td>{{ url.original_url }}</td>
+                    <td>{{ url.short_url }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('shortener') }}">Shorten Another URL</a>
+    </div>
+
+    
+</body>
+
+</html>

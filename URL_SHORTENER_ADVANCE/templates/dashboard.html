@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard||URL Shorten App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/basestyle.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/dashboardstyle.css')}}">
+
+
+</head>
+
+<body style="background-color: #1d243d ">
+    <div class="header" style="background-color: #1d243d">
+        <a href="" class="logo" style="color: #eeee">URL SHORTEN APP</a>
+        <div class="header-right">
+            <a class="active" style="color: #eeee" href="/">Home</a>
+            <a style="color: #eeee" href="/logout">Logout</a>
+        </div>
+    </div>
+    <div class="login">
+        <h1 class="h1 fw-bold mb-0">URL SHORTENER</h1>
+        <form method="post" action="{{ url_for('shortener') }}">
+            <label class="form-label" for="url">Enter URL:</label>
+            <input type="text" name="url" id="url"/>
+            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Shorten</button>
+        </form>
+        {% if short_url %}
+            <form>
+                <label class="form-label" for="short-url">Shortened URL:</label>
+                <input type="text" name="short-url" id="short-url" value="{{ short_url }}" readonly>
+                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onclick="copyToClipboard()">Copy</button>
+            </form>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('urls') }}">View Previous URLs</a>
+    </div>
+</body>
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById("short-url");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText.value);
+    }
+</script>
